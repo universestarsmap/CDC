@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omantel CDC Assistant</title>
+  <style>
+    /* General Styles */
+    body {
+      background-color: #001f3f; /* Dark blue background */
+      color: #d9d9d9; /* Light gray for readable text */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      color: #ff8c00; /* Dark orange for title */
+      font-size: 2.2em;
+      text-shadow: 0 2px 6px rgba(255, 140, 0, 0.5);
+    }
+
+    /* Call Counter Buttons (Consistent Across Pages) */
+    .call-counter {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .call-counter button {
+      background: linear-gradient(135deg, #004080, #002060); /* Magical blue gradient */
+      color: #d9d9d9;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 0 10px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 64, 128, 0.5);
+    }
+
+    .call-counter button:hover {
+      background: linear-gradient(135deg, #002060, #004080);
+      box-shadow: 0 0 15px rgba(0, 64, 128, 0.8);
+      transform: translateY(-2px);
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    nav label {
+      padding: 12px 25px;
+      background: linear-gradient(135deg, #004080, #002060); /* Blue gradient */
+      color: #d9d9d9;
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0, 64, 128, 0.3);
+    }
+
+    nav label:hover {
+      background: linear-gradient(135deg, #002060, #004080);
+      box-shadow: 0 0 15px rgba(0, 64, 128, 0.6);
+    }
+
+    #tab-assistant:checked ~ nav label[for="tab-assistant"],
+    #tab-ipsaver:checked ~ nav label[for="tab-ipsaver"],
+    #tab-callcounter:checked ~ nav label[for="tab-callcounter"] {
+      background: linear-gradient(135deg, #ff8c00, #e07b00); /* Orange gradient for active */
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+    }
+
+    /* Section Styles */
+    section {
+      display: none;
+      background: linear-gradient(135deg, #002060, #003366); /* Dark blue gradient */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 64, 128, 0.4);
+    }
+
+    #tab-assistant:checked ~ section#assistant,
+    #tab-ipsaver:checked ~ section#ipsaver,
+    #tab-callcounter:checked ~ section#callcounter {
+      display: block;
+    }
+
+    section h2 {
+      color: #ff8c00;
+      text-shadow: 0 2px 4px rgba(255, 140, 0, 0.3);
+      margin-top: 0;
+    }
+
+    /* Assistant Section */
+    .search-form label {
+      display: block;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .search-form input[type="text"],
+    .search-form textarea {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #003366, #004080); /* Dark blue gradient */
+      color: #d9d9d9;
+      border: none;
+      border-radius: 5px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .search-form input[type="text"]:focus,
+    .search-form textarea:focus {
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+      outline: none;
+    }
+
+    .search-form button,
+    .ipsaver-form button {
+      background: linear-gradient(135deg, #ff8c00, #e07b00); /* Magical orange gradient */
+      color: #fff;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+    }
+
+    .search-form button:hover,
+    .ipsaver-form button:hover {
+      background: linear-gradient(135deg, #e07b00, #ff8c00);
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+      transform: translateY(-2px);
+    }
+
+    /* IP Saver Section */
+    .ipsaver-form label {
+      display: block;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .ipsaver-form textarea,
+    .ipsaver-form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #003366, #004080);
+      color: #d9d9d9;
+      border: none;
+      border-radius: 5px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .ipsaver-form input[type="text"] {
+      width: 150px;
+    }
+
+    .ipsaver-form textarea:focus,
+    .ipsaver-form input[type="text"]:focus {
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+      outline: none;
+    }
+
+    /* Call Counter Section */
+    .call-display {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .call-display label {
+      margin: 0 20px;
+      font-weight: bold;
+    }
+
+    .call-display input[type="number"] {
+      width: 80px;
+      padding: 8px;
+      background: linear-gradient(135deg, #003366, #004080);
+      color: #d9d9d9;
+      border: none;
+      border-radius: 5px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    /* Hide radio buttons */
+    input[type="radio"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Omantel CDC Assistant powered by Basil</h1>
+    </header>
+    <!-- Call Counter Buttons (Visible on All Pages) -->
+    <div class="call-counter">
+      <button>Call Made</button>
+      <button>Call Received</button>
+      <button>Reset</button>
+    </div>
+    <!-- Hidden radio buttons for tab navigation -->
+    <input type="radio" name="tab" id="tab-assistant" checked>
+    <input type="radio" name="tab" id="tab-ipsaver">
+    <input type="radio" name="tab" id="tab-callcounter">
+    <!-- Navigation tabs -->
+    <nav>
+      <label for="tab-assistant">Assistant</label>
+      <label for="tab-ipsaver">IP Saver</label>
+      <label for="tab-callcounter">Call Counter</label>
+    </nav>
+    <!-- Assistant Section -->
+    <section id="assistant">
+      <h2>Assistant</h2>
+      <div class="search-form">
+        <label>Search Alerts: <input type="text" name="search_query" placeholder="Enter search term"></label><br>
+        <button>Retrieve</button>
+        <label>Results: <textarea rows="6" cols="50" readonly placeholder="Search results will appear here..."></textarea></label>
+      </div>
+    </section>
+    <!-- IP Saver Section -->
+    <section id="ipsaver">
+      <h2>IP Saver</h2>
+      <div class="ipsaver-form">
+        <label>IP List: <textarea name="ip_list" rows="4" cols="50" placeholder="Enter IPs (one per line)"></textarea></label><br>
+        <label>Alert Code: <input type="text" name="alert_code" maxlength="8" placeholder="8 chars max"></label><br>
+        <button>Save</button>
+        <button>Retrieve</button>
+        <label>Preview: <textarea rows="6" cols="50" readonly placeholder="Saved IPs and alert will appear here..."></textarea></label>
+      </div>
+    </section>
+    <!-- Call Counter Section -->
+    <section id="callcounter">
+      <h2>Call Counter</h2>
+      <div class="call-display">
+        <label>Calls Made: <input type="number" value="0" readonly></label>
+        <label>Calls Received: <input type="number" value="0" readonly></label>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
