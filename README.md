@@ -1,302 +1,130 @@
-Omantel CDC Assistant powered by Basil
-    
-    
-    
-    
-    
-    
-    
-      Assistant
-      IP Register
-      Call Counts
-    
-    
-    
-      
-Assistant
-      
-        
-Previous Alerts
-        
-          
-Alert Name: Example Alert 1
-          
-Type: TI
-          
-IP: 192.168.1.1
-          
-Alert Code: ABC12345
-          
-Comments: This is a sample comment.
-        
-        
-          
-Alert Name: Example Alert 2
-          
-Type: RF
-          
-IP: 10.0.0.1
-          
-Alert Code: DEF67890
-          
-Comments: Another comment here.
-        
-      
-      
-        
-Add New Alert
-        
-          Alert Name: 
-          Type:
-             TI
-             RF
-          
-          IP: 
-          Alert Code: 
-          Comments: 
-          Save
-        
-      
-    
-    
-    
-      
-IP Register
-      
-        
-Registered IPs
-        
-          
-            
-              
-IP Address
-              
-Status
-              
-Registered Date
-            
-          
-          
-            
-              
-192.168.1.1
-              
-Active
-              
-2023-10-01
-            
-            
-              
-10.0.0.1
-              
-Inactive
-              
-2023-09-15
-            
-          
-        
-      
-    
-    
-    
-      
-Call Counts
-      
-        Calls Made: 
-        Calls Received: 
-      
-      
-        Call Made
-        Call Received
-        Reset
-      
-    
-  
+# Omantel L1 Assistant Dashboard
 
+Welcome to the **Omantel L1 Assistant Dashboard powered by Basil**! This modern web application is designed to streamline tasks for L1 support teams at Omantel. With a sleek, user-friendly interface built using HTML and CSS, it offers tools for managing alerts, saving IP lists, and tracking call counts—all wrapped in a professional dark blue and orange design.
 
-CSS Code (styles.css)
-/* General Styles */
-body {
-  background-color: #001f3f; /* Dark blue background */
-  color: #333;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+## Table of Contents
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+- [Overview](#overview)
+- [Features](#features)
+- [Usage](#usage)
+  - [Assistant](#assistant)
+  - [IP Saver](#ip-saver)
+  - [Call Counter](#call-counter)
+- [Styling](#styling)
+- [Running the Dashboard](#running-the-dashboard)
+- [Contributing](#contributing)
+- [License](#license)
 
-/* Header */
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+## Overview
 
-header h1 {
-  color: white;
-  font-size: 2em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+The **Omantel L1 Assistant Dashboard** is a static web application tailored for L1 support teams. It provides a tabbed interface to access three main tools: an alert search assistant, an IP list saver, and a call counter. The dashboard combines functionality with a futuristic aesthetic, featuring a dark blue background and vibrant orange accents.
 
-/* Navigation */
-nav {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+This tool is perfect for:
+- Quickly retrieving alert information.
+- Storing and retrieving IP lists with associated alert codes.
+- Tracking the number of calls made and received during support shifts.
 
-nav label {
-  padding: 10px 20px;
-  background-color: #004080; /* Dark blue */
-  color: white;
-  cursor: pointer;
-  border-radius: 5px 5px 0 0;
-  margin: 0 5px;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
-}
+## Features
 
-nav label:hover {
-  background-color: #002060; /* Darker blue on hover */
-}
+Here’s what the dashboard offers:
 
-#tab-assistant:checked ~ nav label[for="tab-assistant"],
-#tab-ipregister:checked ~ nav label[for="tab-ipregister"],
-#tab-callcounts:checked ~ nav label[for="tab-callcounts"] {
-  background-color: #ff8c00; /* Dark orange for active tab */
-}
+- **Tabbed Navigation**: Easily switch between the Assistant, IP Saver, and Call Counter sections using tabs.
+- **Call Counter Buttons**: Persistent buttons at the top of every page for instant call tracking.
+- **Assistant Section**: Search for alerts and display results in a readonly textarea.
+- **IP Saver Section**: Save IP lists and alert codes, then retrieve them in a preview area for copying.
+- **Call Counter Section**: Monitor and update the number of calls made and received.
+- **Responsive Design**: A clean, centered layout with a maximum width of 1200px for readability on various screens.
+- **Visual Appeal**: A dark theme with gradients, shadows, and smooth hover effects.
 
-/* Section Visibility */
-section {
-  display: none;
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
+## Usage
 
-#tab-assistant:checked ~ section#assistant,
-#tab-ipregister:checked ~ section#ipregister,
-#tab-callcounts:checked ~ section#callcounts {
-  display: block;
-}
+The dashboard is divided into three main sections, each with its own purpose. Here’s how to use them:
 
-/* Assistant Section */
-.alerts-list {
-  margin-bottom: 20px;
-}
+### Assistant
 
-.alert {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
+The Assistant section helps you search for and display alert information.
 
-.alert h4 {
-  margin: 0 0 5px 0;
-  color: #004080;
-}
+- **Search Alerts**:
+  - Enter a keyword or phrase in the search input field.
+  - Click the "Retrieve" button to fetch relevant alerts.
+- **View Results**:
+  - The results appear in a readonly textarea below the input field, making it easy to read or copy the information.
 
-form label {
-  display: block;
-  margin-bottom: 10px;
-}
+### IP Saver
 
-form input[type="text"],
-form textarea {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
-}
+The IP Saver section lets you store and retrieve IP lists along with alert codes.
 
-form button {
-  background: linear-gradient(to bottom, #ff8c00, #e07b00); /* Orange gradient */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+- **Save Data**:
+  - In the "IP List" textarea, enter IP addresses (one per line, e.g., `192.168.1.1`).
+  - In the "Alert Code" input, type an 8-character code (e.g., `ALRT1234`).
+  - Click "Save" to store the data locally.
+- **Retrieve Data**:
+  - Click "Retrieve" to load the saved IP list and alert code into the preview textarea.
+- **Preview**:
+  - The readonly preview textarea displays the saved data in a format ready for copying.
 
-form button:hover {
-  background: linear-gradient(to bottom, #e07b00, #ff8c00);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+### Call Counter
 
-/* IP Register Section */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+The Call Counter section tracks the number of calls made and received.
 
-table th, table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
-}
+- **View Counts**:
+  - See the current totals for "Calls Made" and "Calls Received" in readonly input fields.
+- **Update Counts**:
+  - Click "Call Made" to increment the "Calls Made" count by 1.
+  - Click "Call Received" to increment the "Calls Received" count by 1.
+  - Click "Reset" to set both counters back to zero.
+- **Accessibility**:
+  - The counter buttons are available at the top of every page, so you can update counts without switching tabs.
 
-table th {
-  background-color: #f2f2f2;
-  color: #004080;
-}
+## Styling
 
-/* Call Counts Section */
-.call-counts {
-  margin-bottom: 20px;
-}
+The dashboard’s design is both functional and visually striking, with a modern dark theme:
 
-.call-counts label {
-  margin-right: 20px;
-  font-weight: bold;
-}
+- **Color Scheme**:
+  - **Background**: `#001f3f` (a deep, professional blue).
+  - **Text**: `#d9d9d9` (light gray for high contrast and readability).
+  - **Accents**: 
+    - Dark blue gradients (`#004080` to `#002060`) for buttons and sections.
+    - Orange gradients (`#ff8c00` to `#e07b00`) for highlights and active elements.
+- **Visual Effects**:
+  - **Gradients**: Applied to buttons, textareas, and headers for a dynamic look.
+  - **Shadows**: Subtle glow effects on elements to add depth.
+  - **Transitions**: Smooth hover animations on buttons and inputs for interactivity.
+- **Layout**:
+  - A centered container with a max width of 1200px ensures consistency across devices.
+  - Tabs highlight the active section with an orange underline or background.
+  - Call counter buttons are fixed at the top for easy access.
 
-.call-counts input[type="number"] {
-  width: 60px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
+## Running the Dashboard
 
-.call-buttons button {
-  background: linear-gradient(to bottom, #004080, #002060); /* Blue gradient */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: all 0.3s ease;
-}
+Since this is a static HTML/CSS application, setting it up is simple:
 
-.call-buttons button:hover {
-  background: linear-gradient(to bottom, #002060, #004080);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+1. **Save the File**:
+   - Copy the HTML code into a file named `dashboard.html`.
+   - Ensure any accompanying CSS is saved in a linked file (e.g., `styles.css`) if separate.
 
-.call-buttons button:last-child {
-  margin-right: 0;
-}
+2. **Open in a Browser**:
+   - Double-click `dashboard.html` or drag it into a web browser like Chrome, Firefox, or Edge.
 
-/* Hide radio buttons */
-input[type="radio"] {
-  display: none;
-}
-Explanation
-	•	Structure: The dashboard uses hidden radio buttons and labels for tab navigation, allowing section switching with pure CSS using the :checked pseudo-class. The default tab is “Assistant” (checked on load).
-	•	Assistant Section: Displays a list of previous alerts with dummy data (name, type, IP, code, comments) and includes a form to add new alerts with TI/RF options, a large IP textarea, an 8-character alert code input, and a save button.
-	•	IP Register Section: Shows a table of registered IPs with sample data, assuming it’s a list management area since the query didn’t specify details.
-	•	Call Counts Section: Displays static call counts (made and received) with three buttons (Call Made, Call Received, Reset) styled to imply interactivity, though static in this version.
-	•	Styling:
-	◦	Colors: Dark blue (#001f3f, #004080) for the background and buttons, dark orange (#ff8c00, #e07b00) for highlights and active states.
-	◦	Effects: Gradients on buttons, box shadows on sections and hover states, and smooth transitions for a modern feel.
-	◦	Layout: Centered container, tab-like navigation, and clean spacing for readability.
-This design should impress with its sleek, professional look, balancing functionality and aesthetics within the HTML and CSS constraints. Save the CSS in a file named styles.css in the same directory as your HTML file, and open the HTML in a browser to see the result!
+> **Note**: No server or dependencies are required—just a modern web browser!
+
+## Contributing
+
+We welcome contributions to enhance the dashboard! To contribute:
+
+1. **Fork the Repository**: Create your own copy of the project.
+2. **Create a Branch**: Work on your feature or fix in a new branch (e.g., `feature/add-login`).
+3. **Submit a Pull Request**: Share your changes with a clear description of what you’ve done.
+
+Suggestions for improvements:
+- Adding JavaScript for dynamic data storage (e.g., localStorage).
+- Enhancing accessibility with ARIA labels.
+- Expanding the Assistant with more search options.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for full details.
+
+---
+
+**Omantel L1 Assistant Dashboard** – Empowering L1 support with efficiency and style.
